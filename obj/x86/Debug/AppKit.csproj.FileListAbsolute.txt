@@ -1,3 +1,0 @@
-D:\Projects\AppKit\AppKit\bin\x86\Debug\AppKit.exe.config
-D:\Projects\AppKit\AppKit\obj\x86\Debug\AppKit.exe
-D:\Projects\AppKit\AppKit\obj\x86\Debug\AppKit.pdb
