@@ -1,0 +1,8 @@
+D:\WebAppKit\WebAppKit\bin\x86\Release\WebAppKit.exe.config
+D:\WebAppKit\WebAppKit\bin\x86\Release\WebAppKit.exe
+D:\WebAppKit\WebAppKit\bin\x86\Release\Skybound.Gecko.dll
+D:\WebAppKit\WebAppKit\bin\x86\Release\Skybound.Gecko.xml
+D:\WebAppKit\WebAppKit\obj\x86\Release\WebAppKit.Form1.resources
+D:\WebAppKit\WebAppKit\obj\x86\Release\WebAppKit.Properties.Resources.resources
+D:\WebAppKit\WebAppKit\obj\x86\Release\WebAppKit.csproj.GenerateResource.Cache
+D:\WebAppKit\WebAppKit\obj\x86\Release\WebAppKit.exe
