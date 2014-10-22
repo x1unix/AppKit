@@ -1,3 +1,13 @@
 D:\Projects\AppKit\AppKit\bin\x86\Debug\AppKit.exe.config
 D:\Projects\AppKit\AppKit\obj\x86\Debug\AppKit.exe
 D:\Projects\AppKit\AppKit\obj\x86\Debug\AppKit.pdb
+D:\Projects\AppKit\AppKit\obj\x86\Debug\AppKit.csprojResolveAssemblyReference.cache
+D:\Projects\AppKit\AppKit\obj\x86\Debug\WebAppKit.AppHost.resources
+D:\Projects\AppKit\AppKit\obj\x86\Debug\WebAppKit.Properties.Resources.resources
+D:\Projects\AppKit\AppKit\obj\x86\Debug\WebAppKit.wellcome.resources
+D:\Projects\AppKit\AppKit\obj\x86\Debug\AppKit.csproj.GenerateResource.Cache
+D:\Projects\AppKit\AppKit\bin\x86\Debug\AppKit.exe
+D:\Projects\AppKit\AppKit\bin\x86\Debug\AppKit.pdb
+D:\Projects\AppKit\AppKit\bin\x86\Debug\Geckofx-Core.pdb
+D:\Projects\AppKit\AppKit\bin\x86\Debug\Geckofx-Winforms.pdb
+D:\Projects\AppKit\AppKit\obj\x86\Debug\WebAppKit.DebugConsole.resources

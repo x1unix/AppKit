@@ -31,20 +31,19 @@ namespace WebAppKit
 
            // canvas.Dock = DockStyle.Fill;
             canvas.NoDefaultContextMenu = true;
-           // canvas.DocumentTitleChanged += new System.EventHandler(this.retrieveQuery);
-           // this.Controls.Add(canvas);
-            canvas.Navigate(start);
 
-            //Debugger.Show();
-            //var geckoDomElement = canvas.Document.DocumentElement;
-            //if (geckoDomElement is GeckoHtmlElement)
-            //{
-            //    element = (GeckoHtmlElement)geckoDomElement;
-            //    Debugger.Update(element.InnerHtml);
-            //}
-            //canvas.ViewSource();            
-            
-        }
+            canvas.Navigate(start);
+            if (Common.DebugLevel > 0)
+            {
+                if (Common.DebugLevel == 3 && Debugger.isInitialised == false)
+                {
+                    Debugger.Show();
+                }
+                Debugger.AddEvent("Frame ['"+this.Text+"']","Frame initialised");
+                Debugger.AddEvent("Frame ['" + this.Text + "']", "Frame navigated to '"+start+"'");
+                this.canvas.JavascriptError += new Gecko.GeckoWebBrowser.JavascriptErrorEventHandler(this.canvas_JavascriptError);
+            }
+   }
 
         private void AppHost_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -54,15 +53,24 @@ namespace WebAppKit
         private void retrieveQuery(object sender, EventArgs e)
         {
             Intent intent = new Intent(canvas.DocumentTitle);
+           
             if (intent.isValid)
             {
+                string argus = "";
+                Debugger.AddEvent("Frame ['" + this.Text + "']", "Received Intent ('" + canvas.DocumentTitle + "')");
                 if (IIBase.IntentInvokers[intent.query.Host] != null)
                 {
+                    ;
+                    var args = System.Web.HttpUtility.ParseQueryString(intent.query.Query);
+                    for (int ie = 0; ie <= args.Count - 1; ie++) { argus = argus + "["+args.GetKey(ie) + "] = " + args[args.GetKey(ie)] + "; \n"; }
+
+                    Debugger.AddEvent("Frame ['" + this.Text + "']", "Invoke method '" + intent.query.Host + "', Args: { "+argus+" }");
                     IIBase.IntentInvokers[intent.query.Host].AttachIntent(intent);
                     IIBase.IntentInvokers[intent.query.Host].InvokeVoid();
 
                     if (IIBase.IntentInvokers[intent.query.Host].stdout)
                     {
+                        Debugger.AddEvent("RE->DOC", IIBase.IntentInvokers[intent.query.Host].InvokeResult);
                         var script = canvas.Document.CreateElement("script");
                         script.TextContent = IIBase.IntentInvokers[intent.query.Host].InvokeResult;
                         canvas.Document.GetElementsByTagName("head").First().AppendChild(script);
@@ -71,9 +79,7 @@ namespace WebAppKit
                 }
                 else
                 {
-                    string argus = "";
-                    var args = System.Web.HttpUtility.ParseQueryString(intent.query.Query);
-                    for (int ie = 0; ie <= args.Count - 1; ie++) { argus = argus + args.GetKey(ie) + " = " + args[args.GetKey(ie)] + "\n"; }
+                    Debugger.AddEvent("Frame ['" + this.Text + "']", "Unknown Intent invoke ('" + canvas.DocumentTitle + "')");
                     IIBase.throwError("Requested method is not recognized", "Unknown Environment Query (" + intent.query.Host + ")", "BadQueryException (" + intent.query.Host + ")\nat System.Query()\nat " + Path.GetFileName(Application.ExecutablePath) + "\n\nQuery arguments:\n\n" + argus, 000103);
                 }
 
@@ -89,6 +95,17 @@ namespace WebAppKit
         {
             
             
+        }
+
+        private void canvas_JavascriptError(object sender, JavascriptErrorEventArgs e)
+        {
+            if (Debugger.isInitialised == false)
+            {
+                Debugger.Show();
+            }
+            Debugger.AddError(e.Filename, e.ErrorNumber, e.Message, e.Line, e.Pos);
+            //IIBase.throwError("Unhandled JavaScript error",e.Message,"[filename: '"+e.Filename+"']; [line: '"+e.Line+"']; [pos: '"+e.Pos+"']",Convert.ToInt32(e.ErrorNumber));
+           
         }
     }
 }

@@ -437,7 +437,7 @@ namespace WebAppKit
             io = "";
             if (File.Exists(args["filename"]))
             {
-                io = "'" + File.ReadAllText(args["filename"]) + "'";
+                io = File.ReadAllText(args["filename"]);
             }
             else
             {
@@ -445,7 +445,7 @@ namespace WebAppKit
             }
             if (stdout == true)
             {
-                InvokeResult = IResultConverter.JSBool(var_out, File.Exists(args["filename"]));
+                InvokeResult = IResultConverter.JSString(var_out, io);
             }
         }
     }

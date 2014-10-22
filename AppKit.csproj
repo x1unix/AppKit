@@ -68,6 +68,12 @@
     <Compile Include="AppHost.Designer.cs">
       <DependentUpon>AppHost.cs</DependentUpon>
     </Compile>
+    <Compile Include="DebugConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugConsole.Designer.cs">
+      <DependentUpon>DebugConsole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Debugger.cs" />
     <Compile Include="IIBase.cs" />
     <Compile Include="Intent.cs" />
@@ -83,6 +89,9 @@
     </Compile>
     <EmbeddedResource Include="AppHost.resx">
       <DependentUpon>AppHost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebugConsole.resx">
+      <DependentUpon>DebugConsole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

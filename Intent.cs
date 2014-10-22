@@ -105,11 +105,23 @@ namespace WebAppKit
         /// <param name="JS_Var">Variable</param>
         /// <param name="Value">Value</param>
         /// <returns>Javascript bool variable</returns>
-        public static string JSBool(string JS_Var, bool Value) { return "var " + JS_Var + " = " + Convert.ToString(Value) + ";"; }
+        public static string JSBool(string JS_Var, bool Value) { return "var " + JS_Var + " = " + Convert.ToString(Value).ToLower() + ";"; }
+        /// <summary>
+        /// Convert data to JS integer
+        /// </summary>
+        /// <param name="JS_Var">Target variable</param>
+        /// <param name="Value">Value</param>
+        /// <returns>String</returns>
         public static string JSInteger(string JS_Var, int Value) { return "var " + JS_Var + " = " + Convert.ToString(Value) + ";"; }
         public static string JSLong(string JS_Var, long Value) { return "var " + JS_Var + " = " + Convert.ToString(Value) + ";"; }
 
-        
+        /// <summary>
+        /// Convert an array to JS code
+        /// </summary>
+        /// <param name="JS_Var">Target variable</param>
+        /// <param name="arr">array</param>
+        /// <param name="pathFilter">Path filter</param>
+        /// <returns></returns>
         public static string JSArray(string JS_Var, string[] arr, bool pathFilter = true)
         {
             int to = arr.Length - 1;

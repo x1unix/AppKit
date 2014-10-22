@@ -5,7 +5,7 @@ using System.Xml;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing;
-using System.Windows.Forms;
+
 
 namespace WebAppKit
 {
@@ -29,9 +29,16 @@ namespace WebAppKit
             {
 
                 Midlet midlet = new Midlet(args[1]);
+                
                 Common.current_midlet = args[1];
                 Common.work_path = midlet.Workpath;
-
+                Common.DebugLevel = midlet.DebugLevel;
+                if (Common.DebugLevel == 3 && Debugger.isInitialised == false)
+                {
+                    Debugger.Show();
+                }
+                Debugger.AddEvent(Common.current_midlet, "Loaded manifest successfully!");
+                Debugger.AddEvent("VM", "Work path set to: '" +Common.replaceConstant(Common.work_path)+"'");
                 IIBase.Load();
                 //midlet.frame.Show();
                 Application.Run(midlet.frame);
@@ -49,6 +56,7 @@ namespace WebAppKit
     #region "Common"
     public static class Common
     {
+        public static int DebugLevel = 0;
         public static string ConvertToURL(string path)
         {
             string o = path.Replace("\\", "/");
@@ -115,6 +123,7 @@ namespace WebAppKit
                   Application.Exit();
             }
         }
+        public int DebugLevel { get; set; }
         public string Name = "";
         public string Version = "";
         public string Vendor = "";
@@ -159,7 +168,10 @@ namespace WebAppKit
                 Workpath = attr["workpath"].Value;
                 Common.work_path = Workpath;
             }
-            
+            if (attr["debuglevel"] != null)
+            {
+                DebugLevel = Convert.ToInt32(attr["debuglevel"].Value);
+            }
 
             XmlNode xframe = header.SelectSingleNode("frame");
             XmlAttributeCollection f = xframe.Attributes;

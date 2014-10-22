@@ -41,6 +41,7 @@
             this.canvas.TabIndex = 0;
             this.canvas.UseHttpActivityObserver = false;
             this.canvas.DocumentTitleChanged += new System.EventHandler(this.retrieveQuery);
+        //    this.canvas.JavascriptError += new Gecko.GeckoWebBrowser.JavascriptErrorEventHandler(this.canvas_JavascriptError);
             // 
             // AppHost
             // 
