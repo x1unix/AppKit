@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<manifest version="1.0">
+	<application name="AppKit API Demo" version="1.0" vendor="Me" workpath="$cd" debuglevel="3" apilevel="0">
+		<frame type="window:sizable" height="640" width="320" title="AppKit API Demo" src="res:resources/index.html" maximisebox="false" minimisebox="false" controlbox="true">
+		</frame>
+	</application>
+</manifest>

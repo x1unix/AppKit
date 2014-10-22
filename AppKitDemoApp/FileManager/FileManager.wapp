@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<manifest version="1.0">
+	<application name="File Manager" version="1.0" vendor="Me" workpath="$cd" minsdkversion="0.0.3.2">
+		<frame type="window:sizable" height="640" width="800" title="File Manager" src="res:resources/index.html" icon="res:resources/appicon.ico"  maximisebox="false" minimisebox="false" controlbox="true">
+		</frame>
+	</application>
+</manifest>

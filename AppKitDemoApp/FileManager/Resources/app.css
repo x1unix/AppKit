@@ -1,0 +1,26 @@
+.content{
+	width: 100%;
+}
+.grid-item{
+	width: 200px;
+	height:48px;
+	vertical-align: middle;
+	padding: 8px;
+	border: 1px solid transparent;
+	cursor:pointer;
+	float:left;
+}
+.grid-item:hover{
+border-color:#66A7E8;
+background-color: rgba(102,167,232,0.7);
+}
+.red{
+	background-color: red;
+}
+.grid-item span{
+	vertical-align: top;
+	
+	position: relative;
+	top: 18px;	
+	line-height: 100%;
+}

@@ -1,0 +1,12 @@
+* {
+	font-family: "Segoe UI";
+	font-size: 9pt;
+}
+body{
+	background: rgb(240,240,240);
+}
+.about{
+	padding: 8px;
+	width: 99%;
+	background-color: rgb(200,200,200);
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+	<html>
+		<head>
+
+		<!--Nessesary framework API files-->
+		<script language="javascript" src="AppKit.js">
+		</script>
+		<script language="javascript" src="AppKit.IO.js">
+		</script>
+		<!--end-->
+
+
+
+		<style>
+		@import url("Framework.Style.css");
+		p{
+			cursor: pointer;
+		}
+		p:hover{
+			text-decoration: underline;
+		}
+		h3{
+			font-size: 13pt;
+		}
+		.foot:hover{
+			text-decoration: none;
+		}
+		.foot {
+			position: fixed;
+			bottom:5px;
+		}
+		.foot i{
+			color: #646464;
+			font-size: 8pt;
+		}
+		</style>
+		<script type="text/javascript">
+		function show_msg(){
+			var prom = window.prompt("Enter window text");
+			var capt = window.prompt("Enter window title");
+			var iid = window.prompt("Icon: 0-Asterix; 1-Error; 2-Exclamation; 3-Hand; 4-Info;5-Question;6-Stop;7-Warning; else - none");
+
+			MessageBox(prom,capt,iid.toString());
+
+		}
+
+		function file_Exists_demo(){
+			var prom = window.prompt("Enter file path:");
+			//Appkit API Query
+			File.Exists(prom,'command_out');
+			setTimeout('alert("File exists: "+command_out)',500);
+			//alert("File exists: +command_out");
+		}
+
+		function file_delete_demo(){
+			var prom = window.prompt("Enter file path:");
+			//File Delete API Query
+			File.Delete(prom);
+			setTimeout('alert("Operation completed")',500);
+
+		}
+		function file_copy_demo(){
+			var prom = window.prompt("Enter file path:");
+			var prom_next = window.prompt("Enter file destination:");
+			//File Delete API Query
+			File.Copy(prom,prom_next);
+			setTimeout('alert("Operation completed")',500);
+
+		}
+		function file_move_demo(){
+			var prom = window.prompt("Enter file path:");
+			var prom_next = window.prompt("Enter file destination:");
+			//File Delete API Query
+			File.Move(prom,prom_next);
+			setTimeout('alert("Operation completed")',500);
+
+		}
+		function file_read_demo(){
+			var prm = window.prompt("Enter file path:");		
+			File.Read(prm,'command_com');
+			setTimeout('alert("Query result: "+command_com)',500);
+
+		}
+
+		
+		function show_ofd(){
+			var x = new OpenFileDialog();
+			x.ShowDialog('command_com');
+			setTimeout('alert(command_com)',500);
+
+		}
+		function get_host(){
+			Framework.Environment.Hostname('ghost');
+			setTimeout('MessageBox(ghost,"Mashine hostname","4")',500);
+
+			
+		}
+		function get_os(){
+			Framework.Environment.OSVersion('ghos');
+			setTimeout('MessageBox(ghos,"OS Version","4")',200);
+
+			
+		}
+		function get_var(){
+			var v = window.prompt("Input variables sequence:");
+			Framework.Environment.ExpandEnvironmentVariables(v,'vout');
+			setTimeout('MessageBox(vout,"Expanded string","4")',200);
+
+		}
+		function get_ram(){
+			Framework.Environment.WorkingSet('ramout');
+			setTimeout('MessageBox(ramout,"RAM Available for this app","4")',200);
+
+		}
+		function newFrame(){
+			var vv = window.prompt("Frame name:");
+			var fs = window.prompt("Frame layout source:","about:blank");
+			var newframe = new Frame(vv);
+			newframe.Location = fs;
+			newframe.Load();
+			//newframe.Show();
+		}		
+		function closef(){
+			var vv = window.prompt("Frame name:");
+			Frame.FindAnd.Destroy(vv);
+		}
+		function showf(){
+			var vv = window.prompt("Frame name:");
+			Frame.FindAnd.Show(vv);
+		}
+		function hidef(){
+			var vv = window.prompt("Frame name:");
+			Frame.FindAnd.Hide(vv);
+		}
+
+		function directory_create_demo(){
+			var prm = window.prompt("Enter directory path:");
+			Directory.Create(prm,'_out');
+			setTimeout('alert("Directory created")',500);
+		}
+		function directory_delete_demo(){
+			var prm = window.prompt("Enter directory path:");
+			Directory.Delete(prm,'_out');
+			setTimeout('alert("Directory deleted: "+_out)',500);
+		}
+		function directory_getfiles(){
+			var prm = window.prompt("Enter directory path:");
+			var b = [];
+			var output = "";
+			Directory.GetFiles(prm,'_out');
+			//Array to string
+			setTimeout(function(){b = _out; for(var key in b){output = output+b[key]+"\n";}alert(output);},500);
+		}
+		function get_directories_demo(){
+			var prm = window.prompt("Enter directory path:");
+			var b = [];
+			var output = "";
+			Directory.GetDirectories(prm,'_out');
+			//Array to string
+			setTimeout(function(){b = _out; for(var key in b){output = output+b[key]+"\n";}alert(output);},500);
+		}
+		function get_drives_demo(){
+			var b = [];
+			var output = "";
+			Directory.Root('_out');
+			setTimeout(function(){b = _out; for(var key in b){output = output+b[key]+"\n";}alert(output);},500);
+		}
+		function call_shell(){
+			var prm = window.prompt("Enter command:");
+			Framework.Shell(prm);
+			//setTimeout(function(){alert(_out);},500);
+		}
+		</script>
+		</head>
+		<body>
+		<h3>Processes</h3>
+		<p onclick="call_shell();">Shell</p>
+		<h3>Directory</h3>
+		<p onclick="directory_create_demo();">Create</p>
+		<p onclick="directory_delete_demo();">Delete</p>
+		<p onclick="directory_getfiles();">Get list of files</p>
+		<p onclick="get_directories_demo();">Get list of folders</p>
+		<p onclick="get_drives_demo();">Get list of drives</p>
+		<h3>Frames</h3>
+		<p onclick="newFrame();">Create new frame</p>
+		
+		<p onclick="showf();">Get frame by name and show</p>
+		<p onclick="hidef();">Get frame by name and hide</p>
+		<p onclick="closef();">Get frame by name and close</p>
+		<h3>Environment</h3>
+		<p onclick="get_host();">Framework.Environment.Hostname</p>
+		<p onclick="get_os();">Framework.Environment.OSVersion</p>
+		<p onclick="get_var();">Framework.Environment.ExpandEnvironmentVariables</p>
+		<h3>Common Dialogs</h3>
+		<p onclick="show_msg();">Show Messagebox</p>
+		<p onclick="show_ofd();">Open File Dialog</p>
+		<h3>File manager</h3>
+		<p onclick="file_Exists_demo();">If File.Exists</p>
+		<p onclick="file_delete_demo();">File.Delete</p>
+		<p onclick="file_move_demo();">File.Move (Move File)</p>
+		<p onclick="file_copy_demo();">File.Copy (Copy File)</p>
+		<p onclick="file_read_demo();">File.Read (Read Text File)</p>
+		<p class="about" onclick="Framework.SplashScreen();">About AppKit</p>
+		</body>
+	</html>

@@ -1,0 +1,59 @@
+-~-~-~-~-~-~ AppKit API ~-~-~-~-~-~-
+
+Version: 0.5a1
+
+Class - > function:
+
+* Directory - static
+		=> Exists (string path, string variable_name) - Check if path exists
+		=> Create (string path, string variable_name) - create new directory
+		=> Delete (string path, string variable_name) - delete an directory
+		=> GetFiles (string path, string variable_name) - get list of files of directory
+		=> GetDirectories (string path, string variable_name) - get list of subdirectories
+		=> Root (string path, string variable_name) - get a list of mounted drives
+
+
+* File - static
+		=> Exists (string file, string variable_name) - Check if file exists
+		=> Delete (string file)
+		=> Move (string file)
+		=> Copy (string file)
+		=> Read  (string file, string variable_name)- read an text file
+
+
+* Framework - static
+		=> Environment.Hostname - Gets an hostname
+		=> Environment.OSVersion - OS Version
+		=> Environment.ExpandEnvironmentVariables - Get System variable value
+		=> Environment.WorkingSet - Available RAM for this process
+		=> Shell (string command_str) - start process from shell
+
+* Intent (intent_name) - prototype
+		=> assignData (string[] data) - adds data to intent
+		=> setOutput (string) - set variable name for output data
+		=> call(); - call intent
+
+
+* MessageBox(string content,string title,int icon,string var_name) - static
+
+
+* Frame (string frame_name) - prototype
+		=> Location [string] - frame source (URL);
+		=> Name [string] - window name;
+		=> Title [string] - title;
+		=> Height [int];
+		=> Width [int];
+		=> MaximiseBox [bool];
+		=> MinimiseBox [bool];
+		=> ControlBox [bool];
+		=> Opacity [int];
+		=> ShowInTaskbar [bool];
+		=> Load(); - Load and requested frame;
+		=> Show();
+		=> Hide();
+		=> Close();
+
+* Frame - static
+		=> FindAnd.Destroy(frame_name) - close requested frame;
+		=> FindAnd.Show(frame_name);
+		=> FindAnd.Hide(frame_name);
