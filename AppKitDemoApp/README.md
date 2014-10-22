@@ -1,4 +1,5 @@
-== AppKit Demo App ==
+AppKit API Demo
+===============
 
 This folder contains an example of AppKit app with API demo inside.
 
