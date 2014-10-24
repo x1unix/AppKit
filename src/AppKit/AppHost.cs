@@ -20,6 +20,7 @@ namespace WebAppKit
             
         }
         public GeckoHtmlElement element = null;
+        public bool isMain = false;
         public string start = "";
         public bool primary = false;
         public string xLayout = "";
@@ -38,12 +39,14 @@ namespace WebAppKit
                 Debugger.AddEvent("Frame ['"+this.Text+"']","Frame initialised");
                 Debugger.AddEvent("Frame ['" + this.Text + "']", "Frame navigated to '"+start+"'");
                 this.canvas.JavascriptError += new Gecko.GeckoWebBrowser.JavascriptErrorEventHandler(this.canvas_JavascriptError);
+                if (isMain) { Debugger.MainFrame = canvas; }
             }
+
    }
 
         private void AppHost_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (primary) { Application.Exit(); }
+            if (primary || isMain) { Application.Exit(); } else { Debugger.target = Debugger.MainFrame; }
         }
 
         private void retrieveQuery(object sender, EventArgs e)
@@ -61,20 +64,30 @@ namespace WebAppKit
                     for (int ie = 0; ie <= args.Count - 1; ie++) { argus = argus + "["+args.GetKey(ie) + "] = " + args[args.GetKey(ie)] + "; \n"; }
 
                     Debugger.AddEvent("Frame ['" + this.Text + "']", "Invoke method '" + intent.query.Host + "', Args: { "+argus+" }");
-                    IIBase.IntentInvokers[intent.query.Host].AttachIntent(intent);
-                    IIBase.IntentInvokers[intent.query.Host].InvokeVoid();
-
-                    if (IIBase.IntentInvokers[intent.query.Host].stdout)
+                    try
                     {
-                        //Debugger.AddEvent("RE->DOC", IIBase.IntentInvokers[intent.query.Host].InvokeResult);
-                        //var script = canvas.Document.CreateElement("script");
-                        //script.TextContent = IIBase.IntentInvokers[intent.query.Host].InvokeResult;
-                        //canvas.Document.GetElementsByTagName("head").First().AppendChild(script);
-                        //System.Threading.Thread.Sleep(500);
-                        InvokeScriptMethod(IIBase.IntentInvokers[intent.query.Host].InvokeResult);
-                       
-                      
+                        IIBase.IntentInvokers[intent.query.Host].AttachIntent(intent);
+                        IIBase.IntentInvokers[intent.query.Host].AttachIntent(intent);
+                        IIBase.IntentInvokers[intent.query.Host].InvokeVoid();
+
+                        if (IIBase.IntentInvokers[intent.query.Host].stdout)
+                        {
+                            //Debugger.AddEvent("RE->DOC", IIBase.IntentInvokers[intent.query.Host].InvokeResult);
+                            //var script = canvas.Document.CreateElement("script");
+                            //script.TextContent = IIBase.IntentInvokers[intent.query.Host].InvokeResult;
+                            //canvas.Document.GetElementsByTagName("head").First().AppendChild(script);
+                            //System.Threading.Thread.Sleep(500);
+                            InvokeScriptMethod(IIBase.IntentInvokers[intent.query.Host].InvokeResult);
+
+
+                        }
                     }
+                    catch (Exception)
+                    {
+                        Debugger.AddEvent("Frame ['" + this.Text + "']", "Unknown Intent invoke ('" + canvas.DocumentTitle + "')");
+                        IIBase.throwError("Requested method is not recognized", "Unknown Environment Query (" + intent.query.Host + ")", "BadQueryException (" + intent.query.Host + ")\nat System.Query()\nat " + Path.GetFileName(Application.ExecutablePath) + "\n\nQuery arguments:\n\n" + argus, 000103);
+                    }
+                    
                 }
                 else
                 {

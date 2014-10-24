@@ -16,6 +16,7 @@ namespace WebAppKit
         public DebugConsole()
         {
             InitializeComponent();
+            this.ShowInTaskbar = false;
         }
 
         

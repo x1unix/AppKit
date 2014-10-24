@@ -41,6 +41,7 @@ namespace WebAppKit
                 Debugger.AddEvent("VM", "Work path set to: '" +Common.replaceConstant(Common.work_path)+"'");
                 IIBase.Load();
                 //midlet.frame.Show();
+               // Common.MainFrame = midlet.frame;
                 Application.Run(midlet.frame);
                 //WellcomeScreen.Hide();
 
@@ -56,6 +57,7 @@ namespace WebAppKit
     #region "Common"
     public static class Common
     {
+        public static Gecko.GeckoWebBrowser MainFrame;
         public static int DebugLevel = 0;
         public static string ConvertToURL(string path)
         {
@@ -196,6 +198,7 @@ namespace WebAppKit
                 source = Common.replaceConstant(source);
                 source = Common.ConvertToURL(source);
                 frame.start = source;
+                frame.isMain = true;
             }
             if (f["maximisebox"] != null)
             {

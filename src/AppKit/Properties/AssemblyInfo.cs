@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("AirWorks Application Host")]
-[assembly: AssemblyDescription("AirWorks Application Host")]
+[assembly: AssemblyTitle("AppKit Application Host")]
+[assembly: AssemblyDescription("AppKit Runtime For Windows")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AppKit Application Host")]
+[assembly: AssemblyProduct("AppKit Runtime For Windows")]
 [assembly: AssemblyCopyright("Copyright Denis Sedchenko ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -13,6 +13,7 @@ namespace WebAppKit
         public static DebugConsole DebugInterface = new DebugConsole();
         public static AppHost currentHost;
         public static Gecko.GeckoWebBrowser target;
+        public static Gecko.GeckoWebBrowser MainFrame;
         public static void Show()
         {
             if (isInitialised == false)
@@ -28,7 +29,7 @@ namespace WebAppKit
             PgSource.Text = "";
             if (!string.IsNullOrEmpty(w.Document.GetElementsByTagName("html")[0].InnerHtml))
                 PgSource.Text = w.Document.GetElementsByTagName("html")[0].InnerHtml;
-            PgSource.Text = PgSource.Text.Replace("\n", Environment.NewLine);
+            PgSource.Text = "<html>" + Environment.NewLine + PgSource.Text.Replace("\n", Environment.NewLine) + Environment.NewLine+"</html>";
 
 
         }
@@ -77,6 +78,10 @@ namespace WebAppKit
             switch (Tabs.SelectedIndex)
             {
                 case 1:
+                    if (target == null)
+                    {
+                        target = Common.MainFrame;
+                    }
                     GetSource(target);
                     break;
             }
