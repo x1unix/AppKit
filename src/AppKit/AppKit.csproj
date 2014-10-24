@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -68,6 +69,7 @@
     <Compile Include="AppHost.Designer.cs">
       <DependentUpon>AppHost.cs</DependentUpon>
     </Compile>
+    <Compile Include="ComBridge.cs" />
     <Compile Include="DebugConsole.cs">
       <SubType>Form</SubType>
     </Compile>

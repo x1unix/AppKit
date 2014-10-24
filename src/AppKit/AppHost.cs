@@ -20,20 +20,12 @@ namespace WebAppKit
             
         }
         public GeckoHtmlElement element = null;
-
-      //  public GeckoWebBrowser wb = new GeckoWebBrowser();
         public string start = "";
         public bool primary = false;
         public string xLayout = "";
         private void Form1_Load(object sender, EventArgs e)
         {
-            Gecko.Xpcom.Initialize(Application.StartupPath + "\\Gecko\\");
-            
-            //Gecko.Xpcom.Initialize();
-
-           // canvas.Dock = DockStyle.Fill;
             canvas.NoDefaultContextMenu = true;
-
             canvas.Navigate(start);
             if (Common.DebugLevel > 0)
             {
@@ -41,6 +33,8 @@ namespace WebAppKit
                 {
                     Debugger.Show();
                 }
+                Debugger.target = canvas;
+                Debugger.currentHost = this;
                 Debugger.AddEvent("Frame ['"+this.Text+"']","Frame initialised");
                 Debugger.AddEvent("Frame ['" + this.Text + "']", "Frame navigated to '"+start+"'");
                 this.canvas.JavascriptError += new Gecko.GeckoWebBrowser.JavascriptErrorEventHandler(this.canvas_JavascriptError);
@@ -72,11 +66,14 @@ namespace WebAppKit
 
                     if (IIBase.IntentInvokers[intent.query.Host].stdout)
                     {
-                        Debugger.AddEvent("RE->DOC", IIBase.IntentInvokers[intent.query.Host].InvokeResult);
-                        var script = canvas.Document.CreateElement("script");
-                        script.TextContent = IIBase.IntentInvokers[intent.query.Host].InvokeResult;
-                        canvas.Document.GetElementsByTagName("head").First().AppendChild(script);
-                        System.Threading.Thread.Sleep(500);
+                        //Debugger.AddEvent("RE->DOC", IIBase.IntentInvokers[intent.query.Host].InvokeResult);
+                        //var script = canvas.Document.CreateElement("script");
+                        //script.TextContent = IIBase.IntentInvokers[intent.query.Host].InvokeResult;
+                        //canvas.Document.GetElementsByTagName("head").First().AppendChild(script);
+                        //System.Threading.Thread.Sleep(500);
+                        InvokeScriptMethod(IIBase.IntentInvokers[intent.query.Host].InvokeResult);
+                       
+                      
                     }
                 }
                 else
@@ -92,13 +89,30 @@ namespace WebAppKit
             }
         }
 
-
-        private void canvas_LocationChanged(object sender, EventArgs e)
+        #region "ComBridge"
+        /// <summary>
+        /// Invokes JavaScript and returns to document
+        /// </summary>
+        /// <param name="script">JavaScript Code</param>
+        /// <returns></returns>
+        public string InvokeScriptMethod(string script)
         {
-            
-            
+            Debugger.AddEvent("RE->DOC", script);
+            //nsISupports thisPointer = (nsISupports)canvas.Document.GetHtmlElementById("Body").DomObject;
+            nsISupports thisPointer = (nsISupports)canvas.Window.DomWindow;
+            string result;
+            using (var context = new AutoJSContext(canvas.Window.JSContext))
+            {
+                if (!context.EvaluateScript(script, thisPointer, out result))
+                {
+                    Debugger.AddError("JSVM", 13, "Failed to invoke JavaScript ['"+script+"']", 0, 0);
+                    System.Windows.Forms.MessageBox.Show("Failed to execute Javascript");
+                }
+            }
+            System.Threading.Thread.Sleep(500);
+            return result;
         }
-
+        #endregion
         private void canvas_JavascriptError(object sender, JavascriptErrorEventArgs e)
         {
             if (Debugger.isInitialised == false)

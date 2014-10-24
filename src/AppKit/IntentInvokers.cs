@@ -507,7 +507,7 @@ namespace WebAppKit
     #endregion
 
     #region "fm_CreateTextInvoker"
-    public class fm_CreateTextInvoker : IntentInvoker
+    public class vm_IntInvoker : IntentInvoker
     {
 
         public override void InvokeVoid()
@@ -554,4 +554,14 @@ namespace WebAppKit
         }
     }
     #endregion
+
+#region "VM_TEST"
+    public class vm_TestInvoker : IntentInvoker
+    {
+
+        public override void InvokeVoid()
+        {
+        }
+    }
+#endregion
 }

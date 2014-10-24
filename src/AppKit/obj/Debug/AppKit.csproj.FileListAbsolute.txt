@@ -1,1 +1,7 @@
 D:\Projects\AppKit\AppKit\src\AppKit\bin\Debug\AppKit.exe.config
+D:\Projects\AppKit\AppKit\src\AppKit\obj\Debug\AppKit.csprojResolveAssemblyReference.cache
+D:\Projects\AppKit\AppKit\src\AppKit\obj\Debug\WebAppKit.AppHost.resources
+D:\Projects\AppKit\AppKit\src\AppKit\obj\Debug\WebAppKit.DebugConsole.resources
+D:\Projects\AppKit\AppKit\src\AppKit\obj\Debug\WebAppKit.Properties.Resources.resources
+D:\Projects\AppKit\AppKit\src\AppKit\obj\Debug\WebAppKit.wellcome.resources
+D:\Projects\AppKit\AppKit\src\AppKit\obj\Debug\AppKit.csproj.GenerateResource.Cache

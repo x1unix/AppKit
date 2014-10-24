@@ -50,7 +50,9 @@ namespace WebAppKit
             IntentInvokers.Add("fm_deletefile", new fm_DeleteFileInvoker());
             IntentInvokers.Add("fm_readfile", new fm_ReadFileInvoker());
             IntentInvokers.Add("fm_createfile", new fm_CreateFileInvoker());
-            IntentInvokers.Add("fm_createtext", new fm_CreateTextInvoker());
+            IntentInvokers.Add("fm_createtext", new vm_IntInvoker());
+
+            IntentInvokers.Add("vm_test", new vm_IntInvoker());
 
         }
         

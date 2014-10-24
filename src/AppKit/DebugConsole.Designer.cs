@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DebugConsole));
             this.SuspendLayout();
-
             // 
             // DebugConsole
             // 
@@ -45,5 +44,7 @@
         }
 
         #endregion
+
+
     }
 }
