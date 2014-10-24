@@ -1,20 +1,13 @@
-For information on how to build Mozilla from the source code, see:
+AppKit Platform Binaries
+========================
 
-    http://developer.mozilla.org/en/docs/Build_Documentation
+This folder contains latest AppKit build.
+All files in this folder are nessesary for successfull work of the application.
 
-To have your bug fix / feature added to Mozilla, you should create a patch and
-submit it to Bugzilla (http://bugzilla.mozilla.org). Instructions are at:
+AppKit is based on Mozilla Gecko engine. You can update by yourself embedded Gecko engine to newer one.
 
-    http://developer.mozilla.org/en/docs/Creating_a_patch
-    http://developer.mozilla.org/en/docs/Getting_your_patch_in_the_tree
+AppKit use parts of GeckoFX library: http://bitbucket.org/geckofx/
 
-If you have a question about developing Mozilla, and can't find the solution
-on http://developer.mozilla.org, you can try asking your question in a
-mozilla.* Usenet group, or on IRC at irc.mozilla.org. [The Mozilla news groups
-are accessible on Google Groups, or news.mozilla.org with a NNTP reader.]
+2014 - Denis Sedchenko
+mailto:ascii@live.ru
 
-You can download nightly development builds from the the Mozilla FTP server.
-Keep in mind that nightly builds, which are used by Mozilla developers for
-testing, may be buggy. Firefox nightlies, for example, can be found at:
-
-    ftp://ftp.mozilla.org/pub/firefox/nightly/latest-trunk/
