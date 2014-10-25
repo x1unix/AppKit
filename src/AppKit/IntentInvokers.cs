@@ -251,6 +251,33 @@ namespace WebAppKit
     }
     #endregion
 
+    #region "fm_GetAllItems"
+    public class fm_GetAllItemsInvoker : IntentInvoker
+    {
+        public override void InvokeVoid()
+        {
+            if (stdout == true)
+            {
+
+                List<String> a = new List<string>();
+                foreach (string item in Directory.GetDirectories(args["path"]))
+                {
+                    DirectoryInfo n = new DirectoryInfo(item);
+
+                    string[] b = { n.Name, item.Replace(@"\", @"\\"), n.Parent.FullName.Replace(@"\", @"\\"), n.Root.FullName.Replace(@"\", @"\\") };
+                    a.Add(IResultConverter.JSObject("Directory", b, true));
+                }
+                
+                foreach (string item in Directory.GetFiles(args["path"]))
+                {
+                    string[] b = { Path.GetFileName(item), item.Replace(@"\", @"\\") };
+                    a.Add(IResultConverter.JSObject("File", b, true));
+                }
+                InvokeResult = IResultConverter.JSMultiArray(var_out, a.ToArray(), true);
+            }
+        }
+    }
+    #endregion
     #region "fm_GetFilesInvoker"
     public class fm_GetFilesInvoker : IntentInvoker
     {
@@ -261,7 +288,13 @@ namespace WebAppKit
             {
                 if (stdout == true)
                 {
-                    InvokeResult = IResultConverter.JSArray(var_out, Directory.GetFiles(args["path"]), true);
+                    List<String> a = new List<string>();
+                    foreach (string item in Directory.GetFiles(args["path"]))
+                    {
+                        string[] b = { Path.GetFileName(item), item.Replace(@"\", @"\\") };
+                        a.Add(IResultConverter.JSObject("File", b, true));
+                    }
+                    InvokeResult = IResultConverter.JSMultiArray(var_out, a.ToArray(), true);
                 }
             }
             catch (Exception) { InvokeResult = IResultConverter.JSBool(var_out, false); }
@@ -279,7 +312,15 @@ namespace WebAppKit
             {
                 if (stdout == true)
                 {
-                    InvokeResult = IResultConverter.JSArray(var_out, Directory.GetDirectories(args["path"]), true);
+                    List<String> a = new List<string>();
+                    foreach (string item in Directory.GetDirectories(args["path"]))
+                    {                 
+                        DirectoryInfo n = new DirectoryInfo(item);
+
+                        string[] b = { n.Name, item.Replace(@"\", @"\\"), n.Parent.FullName.Replace(@"\", @"\\"), n.Root.FullName.Replace(@"\", @"\\") };
+                        a.Add(IResultConverter.JSObject("Directory", b, true));
+                    }
+                    InvokeResult = IResultConverter.JSMultiArray(var_out, a.ToArray(), true);
                 }
             }
             catch (Exception) { InvokeResult = IResultConverter.JSBool(var_out, false); }
@@ -297,7 +338,15 @@ namespace WebAppKit
             {
                 if (stdout == true)
                 {
-                    InvokeResult = IResultConverter.JSArray(var_out, Directory.GetLogicalDrives(), true);
+                    List<String> a = new List<string>();
+                    foreach (string item in Directory.GetLogicalDrives())
+                    {
+                        DirectoryInfo n = new DirectoryInfo(item);
+                        string[] b = { n.Name, item.Replace(@"\", @"\\") };
+                        a.Add(IResultConverter.JSObject("Directory", b, true));
+                    }
+                    InvokeResult = IResultConverter.JSMultiArray(var_out, a.ToArray(), true);
+                    //InvokeResult = IResultConverter.JSArray(var_out, Directory.GetLogicalDrives(), true);
                 }
             }
             catch (Exception)

@@ -1,5 +1,11 @@
+body{
+	margin:0px;
+	padding: 0px;
+}
 .content{
 	width: 100%;
+	padding:8px;
+	padding-top:15px;
 }
 .grid-item{
 	width: 200px;
@@ -23,4 +29,10 @@ background-color: rgba(102,167,232,0.7);
 	position: relative;
 	top: 18px;	
 	line-height: 100%;
+}
+#app-header{
+	padding:5px;
+	background-color: white;
+	
+	width:100%;
 }

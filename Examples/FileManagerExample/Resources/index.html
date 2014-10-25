@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML>
+	<html>
+		<head>
+		<style>
+		@import url("Framework.Style.css");
+		@import url("app.css");
+		</style>
+		<script type="text/javascript" src="app.js">
+		</script>
+		<script type="text/javascript">
+		var container = document.getElementById("app-container");
+		var files = [];
+		var as_drive = "true";
+		function onCreate(){
+			//Main application entry point
+			Directory.Root("items");
+			container = document.getElementById("app-container");
+
+			document.getElementById("app-header").innerHTML = "<table><tr><td class=\"td_value\"><b>OS:</b><td><td class=\"td_value\">"+Framework.Environment.OS+";</td><td class=\"td_name\"><b>Host name:</b></td><td class=\"td_value\">"+Framework.Environment.Hostname+"</td></table>";
+
+		}
+
+		function showRoot(){
+			container.innerHTML = "";
+			for(i = 0; i < items.length; ++i){addItem(items[i],as_drive);
+				}
+				as_drive = "false";
+		}
+		function goto_dir(dr){
+			document.getElementById("app-header").innerHTML = "<table><tr><td class=\"td_value\"><b>Path:</b><td><td class=\"td_value\">"+dr+"</td></table>";
+			Directory.GetAllItems(dr,"items");
+			/*
+			Directory.GetAllItems - возвращает все обьекты в папке
+
+			Папки - возвращает как обьекты Directory
+			Файлы - возвращает как обьекты File
+
+			File
+			 -- Name - имя файла
+			 -- Path - полный путь к обьекту
+
+			 Directory
+			 -------- Name - имя папки
+			 -------- Path - полный путь к обьекту
+
+			*/
+			showRoot();
+		}
+		</script>
+		</head>
+		<body>
+			<div class="header" id="app-header">
+
+			</div>
+			<div class="content" id="app-container">
+				<div class="grid-item" onclick="showRoot();">
+					<img src="pc.png"/>
+					<span>Этот Компьютер</span>
+				</div>
+
+				
+			</div>
+		</body>
+	</html>

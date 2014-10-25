@@ -98,14 +98,21 @@ namespace WebAppKit
         /// <param name="JS_Var">Target</param>
         /// <param name="Value">Value</param>
         /// <returns>Javacript variable with string</returns>
-        public static string JSString(string JS_Var, string Value) { return "var " + JS_Var + " = \"" + Value + "\";"; }
+        public static string JSString(string JS_Var, string Value, bool asVariable=true) {
+            string prefix = "";
+            if (asVariable) { prefix = "var "; }
+            return prefix + JS_Var + " = \"" + Value + "\";"; }
         /// <summary>
         /// Convert data to JavaScript bool variable
         /// </summary>
         /// <param name="JS_Var">Variable</param>
         /// <param name="Value">Value</param>
         /// <returns>Javascript bool variable</returns>
-        public static string JSBool(string JS_Var, bool Value) { return "var " + JS_Var + " = " + Convert.ToString(Value).ToLower() + ";"; }
+        public static string JSBool(string JS_Var, bool Value, bool asVariable=true)
+        {
+            string prefix = "";
+            if (asVariable) { prefix = "var "; } return prefix + JS_Var + " = " + Convert.ToString(Value).ToLower() + ";";
+        }
         /// <summary>
         /// Convert data to JS integer
         /// </summary>
@@ -113,8 +120,55 @@ namespace WebAppKit
         /// <param name="Value">Value</param>
         /// <returns>String</returns>
         public static string JSInteger(string JS_Var, int Value) { return "var " + JS_Var + " = " + Convert.ToString(Value) + ";"; }
-        public static string JSLong(string JS_Var, long Value) { return "var " + JS_Var + " = " + Convert.ToString(Value) + ";"; }
-
+        public static string JSLong(string JS_Var, long Value, bool asVariable = true)
+        {
+            string prefix = "";
+            if (asVariable) { prefix = "var "; } return prefix + JS_Var + " = " + Convert.ToString(Value) + ";";
+        }
+        public static string JSObject(string name, string[] args,bool asNew = false)
+        {
+            string itemC = "";
+            if (asNew) { itemC = "new "; }
+            int to = args.Length - 1;
+            string _return = itemC + name+"(";
+             for (int x = 0; x <= to; x++)
+                {
+                    string comma = "";
+                    if (x != to)
+                    {
+                        comma = ",";
+                    }
+                    string c = args[x];
+                    _return = _return + "\"" + c + "\"" + comma;
+                }
+             _return = _return + ")";
+             return _return;
+        }
+        public static string JSMultiArray(string JS_Var, string[] arr,bool asVariable = true)
+        {
+            int to = arr.Length - 1;
+            string _return = "[";
+            string prefix = "";
+            if (asVariable) { prefix = "var "; }
+            if (arr.Length > 0)
+            {
+                for (int x = 0; x <= to; x++)
+                {
+                    
+                    string comma = "";
+                    if (x != to)
+                    {
+                        comma = ",";
+                    }
+                    string c = arr[x];
+                     c = arr[x].Replace("\\", "\\\\");
+                    _return = _return +  c + comma;
+                }
+            }
+            _return = _return + "]";
+            _return = prefix + JS_Var + " = " + _return + ";";
+            return _return;
+        }
         /// <summary>
         /// Convert an array to JS code
         /// </summary>
@@ -122,25 +176,38 @@ namespace WebAppKit
         /// <param name="arr">array</param>
         /// <param name="pathFilter">Path filter</param>
         /// <returns></returns>
-        public static string JSArray(string JS_Var, string[] arr, bool pathFilter = true)
+        public static string JSArray(string JS_Var, string[] arr, bool pathFilter = true,bool asVariable=true)
         {
             int to = arr.Length - 1;
             string _return = "[";
-            for (int x = 0; x <= to; x++)
+            string prefix = "";
+            if (asVariable) { prefix = "var "; }
+            if (arr.Length > 0)
             {
-                string comma = "";
-                if (x != to)
+                for (int x = 0; x <= to; x++)
                 {
-                    comma = ",";
+                    string comma = "";
+                    if (x != to)
+                    {
+                        comma = ",";
+                    }
+                    string c = arr[x];
+                    if (pathFilter) { c = arr[x].Replace("\\", "\\\\"); }
+                    _return = _return + "\"" + c + "\"" + comma;
                 }
-                string c = arr[x];
-                if (pathFilter) { c = arr[x].Replace("\\", "\\\\"); }
-                _return = _return + "\"" + c + "\"" + comma;
             }
             _return = _return + "]";
-            _return = "var " + JS_Var + " = " + _return+";";
+            _return = prefix + JS_Var + " = " + _return+";";
             return _return;
         }
 
+    }
+    public class JSContainer
+    {
+        public string Content { get; set; }
+        public void AddScript(String script)
+        {
+            Content = Content + script + "\n" + Environment.NewLine;
+        }
     }
 }

@@ -1,4 +1,7 @@
-var Directory = function(){};
+
+
+
+var Directory = function (name, path, parent, root) { this.Name = name; this.Path = path; this.Parent = parent, this.Root = root; this.Type = "Directory";};
 Directory.Exists = function(dir,out){
 	var arg = [];
 	arg["path"] = dir;
@@ -24,16 +27,21 @@ Directory.GetDirectories= function (dir,out){
 	arg["path"] = dir;
 	Framework.Query("fm_GetDirectories",arg,out);
 }
+Directory.GetAllItems = function (dir, out) {
+    var arg = [];
+    arg["path"] = dir;
+    Framework.Query("fm_GetAllItems", arg, out);
+}
 Directory.Root= function (out){
-	var i = new Intent("fm_getdirectoriesroot");
+	var i = new Intent("fm_GetDirectoriesRoot");
 	i.setOutput(out);
 	i.call();
 }
 
 
+
 //File manage
-function File(){
-}
+var File = function (name, path) { this.Name = name; this.Path = path; this.Type = "File"; };
 File.Exists = function(filename, stdout){
 var arg = [];
 arg["filename"] = filename;
@@ -61,6 +69,7 @@ var arg = [];
 arg["filename"] = filename;
 Framework.Query("fm_ReadFile",arg,stdout);	
 };
+
 
 
 

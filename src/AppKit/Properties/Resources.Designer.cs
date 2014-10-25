@@ -61,6 +61,59 @@ namespace WebAppKit.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to //System Frame Prototype
+        ///function Frame(fname){
+        ///	this.Name = fname;
+        ///	window[fname] = this.Name;
+        ///}
+        ///Frame.prototype.Location = &quot;about:blank&quot;;
+        ///Frame.prototype.Name = &quot;&quot;;
+        ///Frame.prototype.Title = &quot;undefined&quot;;
+        ///Frame.prototype.Height = 640;
+        ///Frame.prototype.Width = 640;
+        ///Frame.prototype.MaximiseBox = true;
+        ///Frame.prototype.MinimiseBox = true;
+        ///Frame.prototype.ControlBox = true;
+        ///Frame.prototype.Opacity = 100;
+        ///Frame.prototype.ShowInTaskbar = true;
+        ///Frame.prototype.Load = function(stdout){
+        ///	if(this.Name != [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AppKit {
+            get {
+                return ResourceManager.GetString("AppKit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to var Directory = function(){};
+        ///Directory.Exists = function(dir,out){
+        ///	var arg = [];
+        ///	arg[&quot;path&quot;] = dir;
+        ///	Framework.Query(&quot;fm_DirExists&quot;,arg,out);
+        ///};
+        ///Directory.Create = function(dir,out){
+        ///	var arg = [];
+        ///	arg[&quot;path&quot;] = dir;
+        ///	Framework.Query(&quot;fm_DirCreate&quot;,arg,out);
+        ///};
+        ///Directory.Delete = function(dir,out){
+        ///	var arg = [];
+        ///	arg[&quot;path&quot;] = dir;
+        ///	Framework.Query(&quot;fm_DirDelete&quot;,arg,out);
+        ///};
+        ///Directory.GetFiles= function (dir,out){
+        ///	var arg = [];
+        ///	arg[&quot;path&quot;] = dir;
+        ///	Framework.Query(&quot;fm_GetFiles&quot;,arg [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string AppKit_IO {
+            get {
+                return ResourceManager.GetString("AppKit_IO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Logo {

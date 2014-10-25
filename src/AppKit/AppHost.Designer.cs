@@ -40,8 +40,9 @@
             this.canvas.Size = new System.Drawing.Size(284, 261);
             this.canvas.TabIndex = 0;
             this.canvas.UseHttpActivityObserver = false;
+            this.canvas.Navigated += new System.EventHandler<Gecko.GeckoNavigatedEventArgs>(this.canvas_Navigated);
+            this.canvas.DocumentCompleted += new System.EventHandler<Gecko.Events.GeckoDocumentCompletedEventArgs>(this.canvas_DocumentCompleted);
             this.canvas.DocumentTitleChanged += new System.EventHandler(this.retrieveQuery);
-        //    this.canvas.JavascriptError += new Gecko.GeckoWebBrowser.JavascriptErrorEventHandler(this.canvas_JavascriptError);
             // 
             // AppHost
             // 

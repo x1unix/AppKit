@@ -83,6 +83,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runtime.cs" />
+    <Compile Include="SystemInformation.cs" />
     <Compile Include="wellcome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +124,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon_323.ico" />
+    <None Include="Resources\AppKit.js">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\AppKit.IO.js" />
     <None Include="Resources\Logo.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

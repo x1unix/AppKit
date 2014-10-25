@@ -124,20 +124,13 @@ new_intent.call();
 
 Framework.Environment = function(){
 }
-Framework.Environment.Hostname = function(stdout){
-	Framework.void("env_GetHostName",stdout);
-}
-Framework.Environment.OSVersion = function(stdout){
-	Framework.void("env_GetOSVersion",stdout);
-}
+
 Framework.Environment.ExpandEnvironmentVariables = function(var_sequence, stdout){
 	var arg = [];
 	arg["var"] = var_sequence;
 	Framework.Query("env_ExpandVariables",arg,stdout);
 }
-Framework.Environment.WorkingSet = function(stdout){
-	Framework.void("env_GetWorkingSet",stdout);
-}
+
 Framework.Shell = function(command){
 	var srun = new Intent("CmdShell");
 	var arg = [];

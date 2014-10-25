@@ -38,7 +38,7 @@ namespace WebAppKit
         }
         public static void AddError(string source, uint code, string message, uint line, uint chr)
         {
-            System.Media.SystemSounds.Asterisk.Play();
+            //System.Media.SystemSounds.Asterisk.Play();
             ErrorsList.Text = ErrorsList.Text + source + " [" + code.ToString() + "]:: " + message + " at line " + line.ToString() + ", char " + chr.ToString() + ";\n" + Environment.NewLine + Environment.NewLine;
         }
 

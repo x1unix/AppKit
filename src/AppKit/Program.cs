@@ -27,18 +27,26 @@ namespace WebAppKit
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {
+                if (args.Length > 2)
+                {
+                    for (int x = 1; x < args.Length; x++)
+                    {
+                        Common.Arguments.Add(args[x]);
+                    }
+                }
 
                 Midlet midlet = new Midlet(args[1]);
                 
                 Common.current_midlet = args[1];
                 Common.work_path = midlet.Workpath;
                 Common.DebugLevel = midlet.DebugLevel;
-                if (Common.DebugLevel == 3 && Debugger.isInitialised == false)
+                if (Common.DebugLevel > 0 && Debugger.isInitialised == false)
                 {
-                    Debugger.Show();
+                    Debugger.Show(); 
+                    Debugger.AddEvent(Common.current_midlet, "Loaded manifest successfully!");
+                    Debugger.AddEvent("VM", "Work path set to: '" + Common.replaceConstant(Common.work_path) + "'");
                 }
-                Debugger.AddEvent(Common.current_midlet, "Loaded manifest successfully!");
-                Debugger.AddEvent("VM", "Work path set to: '" +Common.replaceConstant(Common.work_path)+"'");
+                
                 IIBase.Load();
                 //midlet.frame.Show();
                // Common.MainFrame = midlet.frame;
@@ -57,6 +65,7 @@ namespace WebAppKit
     #region "Common"
     public static class Common
     {
+        public static List<string> Arguments = new List<string>();
         public static Gecko.GeckoWebBrowser MainFrame;
         public static int DebugLevel = 0;
         public static string ConvertToURL(string path)
